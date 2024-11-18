@@ -1,0 +1,47 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Customization Dashboard</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Custom Email Generator Dashboard</h1>
+
+    <form action="/" method="POST" enctype="multipart/form-data">
+        <!-- File Upload for CSV -->
+        <div>
+            <label for="file">Upload CSV File:</label>
+            <input type="file" id="file" name="file" required>
+        </div>
+        
+        <!-- Prompt Input Box -->
+        <div>
+            <label for="prompt_template">Email Prompt Template:</label>
+            <textarea id="prompt_template" name="prompt_template" rows="5" cols="60" placeholder="Enter your email template here. Use placeholders like {Company Name}, {Location}..."></textarea>
+        </div>
+<!-- New Fields for Sender Email and Password -->
+<div>
+    <label for="sender_email">Sender Email:</label>
+    <input type="email" id="sender_email" name="sender_email" required>
+</div>
+<div>
+    <label for="sender_password">Sender Password:</label>
+    <input type="password" id="sender_password" name="sender_password" required>
+</div>
+
+<button type="submit">Generate and Send Emails</button>
+    </form>
+
+    <div>
+        <h2>Instructions:</h2>
+        <p>1. Upload a CSV file containing columns like Company Name, Location, Email, Product, etc.</p>
+        <p>2. Use placeholders in the email template (e.g., "Hello {Company Name}, we are excited to introduce...").</p>
+        <p>3. Click "Generate and Send Emails" to send personalized emails based on the uploaded data.</p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+/* style.css */
+
+/* General Reset */
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fa;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Heading styling */
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+/* Overall status section styling */
+.status {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.status h2 {
+    font-size: 20px;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.status p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Table styling for individual email statuses */
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    overflow: hidden;
+}
+
+thead {
+    background-color: #3498db;
+    color: white;
+}
+
+thead th {
+    padding: 10px;
+    text-align: center;
+}
+
+tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tbody td {
+    padding: 10px;
+    text-align: center;
+}
+
+/* No data message styling */
+.no-data {
+    text-align: center;
+    font-size: 16px;
+    color: #555;
+    margin-top: 20px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .status {
+        padding: 15px;
+    }
+
+    table {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    thead th, tbody td {
+        padding: 8px;
+    }
+}

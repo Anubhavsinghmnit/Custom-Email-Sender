@@ -1,0 +1,76 @@
+<!-- templates/analytics.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Analytics Dashboard</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Email Analytics Dashboard</h1>
+
+    <h2>Overall Status</h2>
+    <div id="summary">
+        <p>Sent: {{ status_data["summary"]["sent"] }}</p>
+        <p>Pending: {{ status_data["summary"]["pending"] }}</p>
+        <p>Failed: {{ status_data["summary"]["failed"] }}</p>
+        <p>Opened: {{ status_data["summary"]["opened"] }}</p>
+    </div>
+
+    <h2>Individual Email Status</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Recipient Email</th>
+                <th>Status</th>
+                <th>Opened</th>
+            </tr>
+        </thead>
+        <tbody id="status-table">
+            {% for email, details in status_data["details"].items() %}
+            <tr>
+                <td>{{ email }}</td>
+                <td>{{ details["status"] }}</td>
+                <td>{{ "Yes" if details["opened"] else "No" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        // JavaScript to periodically refresh data for real-time analytics
+        setInterval(async function() {
+            try {
+                const response = await fetch("{{ url_for('analytics') }}");
+                const data = await response.json();
+
+                // Update summary section
+                document.getElementById("summary").innerHTML = `
+                    <p>Sent: ${data.summary.sent}</p>
+                    <p>Pending: ${data.summary.pending}</p>
+                    <p>Failed: ${data.summary.failed}</p>
+                    <p>Opened: ${data.summary.opened}</p>
+                `;
+
+                // Update individual status table
+                const statusTable = document.getElementById("status-table");
+                statusTable.innerHTML = "";  // Clear existing table rows
+
+                for (const [email, details] of Object.entries(data.details)) {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${email}</td>
+                        <td>${details.status}</td>
+                        <td>${details.opened ? "Yes" : "No"}</td>
+                    `;
+                    statusTable.appendChild(row);
+                }
+            } catch (error) {
+                console.error("Failed to fetch analytics data:", error);
+            }
+        }, 5000);  // Refresh every 5 seconds
+    </script>
+</body>
+</html>
